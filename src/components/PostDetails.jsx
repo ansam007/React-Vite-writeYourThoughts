@@ -1,6 +1,6 @@
 import { useLoaderData, Link } from 'react-router-dom';
 
-import Modal from './Modal';
+import Modal from '../components/Modal';
 import classes from './PostDetails.module.css';
 
 function PostDetails() {
@@ -32,3 +32,9 @@ function PostDetails() {
 }
 
 export default PostDetails;
+
+export async function loader( {params} ) {
+  const response = await fetch('http://localhost:8080/posts/' + params.postId);
+  const resData = await response.json(); 
+  return resData.post;
+}
